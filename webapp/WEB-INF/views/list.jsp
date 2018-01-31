@@ -33,7 +33,7 @@
 				<td>${gVo.no}</td>
 				<td>${gVo.name}</td>
 				<td>${gVo.date}</td>
-				<td><a href="delete">삭제</a></td>
+				<td><a href="deleteform?no=${gVo.no}">삭제</a></td>
 			</tr>
 			<tr>
 				<td colspan=4>${gVo.content}</td>

@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>	
-	<form method="post" action="gbc?a=delete">
-	<input type='text' name="no" value="번호">
+	<form method="post" action="delete">
+	<input type='text' name="no" value="${no}">
 	<table>
 		<tr>
 			<td>비밀번호</td>
