@@ -24,41 +24,7 @@ public class GuestBookDao {
 	private ResultSet rs = null;
 
 	public void insert(GuestVo vo) {
-		try {
-			// 1. JDBC 드라이버 (Oracle) 로딩
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-
-			// 2. Connection 얻어오기
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-
-			// 3. SQL문 준비 / 바인딩 / 실행
-			String query = "INSERT INTO guestBook " + "VALUES (seq_guestbook_no.nextval, ?, ?, ?, sysdate)";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getPassword());
-			pstmt.setString(3, vo.getContent());
-			int cnt = pstmt.executeUpdate();
-
-			System.out.println(cnt + "건 저장완료");
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("error: 드라이버 로딩 실패 - " + e);
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			// 5. 자원정리
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			}
-		}
+		sqlSession.insert("guestbook.insert", vo);
 	}
 
 	public List<GuestVo> getList() {
